@@ -21,15 +21,11 @@ void loop() {
   if(Serial.available()){
     if(flag){
       EEPROM.update(mem1,Serial.readString().toInt());
-//      Serial.println(pos1);
-//      Serial.flush();
       EEPROM.write(flagMem, (flag+1)%2);
     }
     if(!flag)
       EEPROM.update(mem2,Serial.readString().toInt());
       EEPROM.write(flagMem, (flag+1)%2);
-//      Serial.println(pos2);
-//      Serial.flush();
   }
   servo1.write(EEPROM.read(mem1));
   servo2.write(EEPROM.read(mem2));
