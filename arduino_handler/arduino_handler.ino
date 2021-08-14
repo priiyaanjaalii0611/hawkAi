@@ -22,10 +22,12 @@ void loop() {
     if(flag){
       EEPROM.update(mem1,Serial.readString().toInt());
       EEPROM.write(flagMem, (flag+1)%2);
+      flag=(flag+1)%2;
     }
     if(!flag)
       EEPROM.update(mem2,Serial.readString().toInt());
       EEPROM.write(flagMem, (flag+1)%2);
+      flag=(flag+1)%2;
   }
   servo1.write(EEPROM.read(mem1));
   servo2.write(EEPROM.read(mem2));
