@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 
 
-contour_f=np.array(0)
+# contour_f=np.array(0)
 cam = cv.VideoCapture(0)
 address="http://192.168.29.145:8080/video"
 cam.open(address)
@@ -71,9 +71,11 @@ for line in lines[0]:
 # finding contours
 contours = cv.findContours(edges.copy(), cv.RETR_EXTERNAL,cv.CHAIN_APPROX_TC89_KCOS)[0]
 
-contours = filter(lambda cont: cv.arcLength(cont, False) > 100, contours)
-contours = filter(lambda cont: cv.contourArea(cont) > 100, contours)
-contour_f=contours
+contours = list(filter(lambda cont: cv.arcLength(cont, False) > 100, contours))
+contours = list(filter(lambda cont: cv.contourArea(cont) > 500, contours))
+
+
+print(contours)
 
 
 
@@ -103,6 +105,7 @@ cv.waitKey(0)
 # cv.waitKey(0)
 # cv.imshow('result', edges)
 # cv.waitKey(0)
+
 # cv.imshow('result', new)
 # cv.waitKey(0)
             
