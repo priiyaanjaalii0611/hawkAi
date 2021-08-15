@@ -4,8 +4,8 @@ from imutils import contours
 import numpy as np
 import argparse
 import imutils
-import cv2
-import detectt
+import cv2  
+import detect_ref
 
 def midpoint(ptA, ptB):
 	return ((ptA[0] + ptB[0]) * 0.5, (ptA[1] + ptB[1]) * 0.5)
@@ -41,11 +41,14 @@ refObj = None
 
 
 
+print(detect_ref.rects)
 for c in cnts:
     if cv2.contourArea(c) < 100:
         continue
     if refObj is None:
-        c=detectt.contour_f
+        c=detect_ref.rects[0]
+        
+        
     box= cv2.minAreaRect(c)
     box= cv2.cv.BoxPoints(box) if imutils.is_cv2() else cv2.boxPoints(box)
     box= np.array(box, dtype="int")
